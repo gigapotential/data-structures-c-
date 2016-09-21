@@ -18,6 +18,7 @@ class SingleList {
     SingleList():head(0) {}
     void insert(T t); 
     void print(); 
+    void reverse();
 };
 
 template <typename T>
@@ -31,12 +32,26 @@ void SingleList<T>::insert(T t) {
 }
 
 template <typename T>
+void SingleList<T>::reverse() {
+  SingleNode<T> *h = head;
+  SingleNode<T> *newlist = 0;
+  while(h != 0) {
+    SingleNode<T> *next = h->next;
+    h->next = newlist;
+    newlist = h;   
+    h = next;
+  } 
+  head = newlist;  
+}
+
+template <typename T>
 void SingleList<T>::print() {
   SingleNode<T>* h = head;
   while(h) {
     cout << h->data << " ";
     h = h->next;
   }
+  cout << endl;
 }
 
 #endif
