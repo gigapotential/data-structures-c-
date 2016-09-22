@@ -38,7 +38,25 @@ void test_7() {
   singleList.print();
 }
 
+void test_9() {
+  SingleList<int> singleList;
+  S1(singleList);
+  singleList.print();
+  singleList.shuffle();
+  singleList.print();
+}
+
+void test_11() {
+  SingleList<int> singleList;
+  S2(singleList);
+  singleList.print();
+  singleList.shuffle();
+  singleList.print();
+}
+
 int main() {
   test_5();
   test_7();  
+  test_9();
+  test_11();
 }
