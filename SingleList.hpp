@@ -15,14 +15,20 @@ class SingleList {
 
   // copy constructor & assignement operator should be priveate due to pointer as memeber variable
     SingleNode<T>*  _reverse(SingleNode<T> *h); 
+    SingleNode<T>* _sort(SingleNode<T> *h);
+    SingleNode<T>* _max(SingleNode<T> *h);
+    void _remove(SingleNode<T>** p_h, SingleNode<T> *n);
   public:
     SingleList():head(0) {}
     void insert(T t); 
     void print(); 
     void reverse();
     void shuffle();
+    void sort();
     int size();
 };
+
+
 
 template <typename T>
 void SingleList<T>::insert(T t) {
@@ -98,6 +104,64 @@ void SingleList<T>::shuffle() {
   }   
    
   head = _reverse(nl); 
+}
+
+template <typename T>
+void SingleList<T>::sort() {
+  head = _sort(head);
+}
+
+template <typename T>
+SingleNode<T>* SingleList<T>::_max(SingleNode<T>* hd) {
+  SingleNode<T>* maxnode = 0;
+  T maxvalue = numeric_limits<T>::min();
+  while(hd != 0) {
+    if(hd->data > maxvalue) {
+      maxvalue = hd->data;
+      maxnode = hd;
+    }
+    hd = hd->next;
+  }
+  return maxnode;
+}
+
+template <typename T>
+void SingleList<T>::_remove(SingleNode<T> **p_hd, SingleNode<T>* remove) {
+  if(p_hd == 0 || remove == 0 ) return;
+
+  SingleNode<T>* hd = *p_hd;
+  
+  // first element
+  if( hd == remove) {
+    SingleNode<T>* next = hd->next;
+    hd->next = 0;
+    *p_hd = next;    
+  } else {
+    SingleNode<T> *prev;
+    while(hd != remove && hd != 0) {
+      prev = hd;
+      hd = hd->next;
+    }
+    
+    if(hd == remove) {
+      prev->next = hd->next;
+      hd->next = 0;
+    }
+  }
+    
+}
+
+
+template <typename T>
+SingleNode<T>* SingleList<T>::_sort(SingleNode<T>* h) {
+  SingleNode<T>* sorted = 0;
+  while(h != 0) {
+    SingleNode<T>* maxnode = _max(h);
+    _remove(&h, maxnode);
+    maxnode->next = sorted; 
+    sorted = maxnode; 
+  }    
+  return sorted; 
 }
 
 template <typename T>

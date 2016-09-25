@@ -7,7 +7,7 @@
 using namespace std;
 
 void S1(SingleList<int>& singleList) {
-  for(int i = 100; i >= 1; --i) {
+  for(int i = 5; i >= 1; --i) {
     singleList.insert(i);
   }
 }
@@ -17,9 +17,25 @@ void S2(SingleList<int>& singleList) {
   mt19937 mt(rd());
   uniform_int_distribution<int> dist(1, 100);
 
-  for(int i = 100; i >= 1; --i) {
+  for(int i = 5; i >= 1; --i) {
     singleList.insert(dist(mt));
   }
+}
+
+void test_1() {
+  SingleList<int> singleList;
+  S1(singleList); 
+  singleList.print();
+  singleList.sort();
+  singleList.print();
+}
+
+void test_3() {
+  SingleList<int> singleList;
+  S2(singleList); 
+  singleList.print();
+  singleList.sort();
+  singleList.print();
 }
 
 void test_5() {
@@ -55,6 +71,8 @@ void test_11() {
 }
 
 int main() {
+  test_1();
+  test_3(); 
   test_5();
   test_7();  
   test_9();
