@@ -8,14 +8,16 @@
 
 using namespace std;
 
+int N = 10;
+
 void S1(SingleList<int>& singleList) {
-  for(int i = 10; i >= 1; --i) {
+  for(int i = N; i >= 1; --i) {
     singleList.insert(i);
   }
 }
 
 void S1(DoubleList<int>& doubleList) {
-  for(int i = 1; i <= 10; ++i) {
+  for(int i = 1; i <= N; ++i) {
     doubleList.insert(i);
   }
 }
@@ -25,7 +27,7 @@ void S2(SingleList<int>& singleList) {
   mt19937 mt(rd());
   uniform_int_distribution<int> dist(1, 100);
 
-  for(int i = 10; i >= 1; --i) {
+  for(int i = N; i >= 1; --i) {
     singleList.insert(dist(mt));
   }
 }
@@ -35,7 +37,7 @@ void S2(DoubleList<int>& doubleList) {
   mt19937 mt(rd());
   uniform_int_distribution<int> dist(1, 100);
 
-  for(int i = 1; i <= 8; ++i) {
+  for(int i = 1; i <= N; ++i) {
     doubleList.insert(dist(mt));
   }
 }
