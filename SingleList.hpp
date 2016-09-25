@@ -25,6 +25,7 @@ class SingleList {
     void reverse();
     void shuffle();
     void sort();
+    void team_of_n(int n);
     int size();
 };
 
@@ -162,6 +163,39 @@ SingleNode<T>* SingleList<T>::_sort(SingleNode<T>* h) {
     sorted = maxnode; 
   }    
   return sorted; 
+}
+
+template <typename T>
+void SingleList<T>::team_of_n(int n) {
+  SingleNode<T> *h = head, *next, *prev, *newhead= 0, *prev_list_end = 0 ;
+  
+  while(h != 0) {
+    int count = 1;
+    prev = 0;
+    next = h;
+    while(count <= n && next != 0) {
+      prev = next;
+      next = next->next;
+      ++count;
+    }  
+        
+    if(prev != 0) prev->next = 0;
+    h = _sort(h); 
+    if(newhead == 0) newhead = h;
+    
+    if(prev_list_end == 0) {
+      while(h->next != 0) h = h->next;  
+      prev_list_end = h;
+    } else {
+      prev_list_end->next = h;
+      while(h->next != 0) h = h->next;
+      prev_list_end = h;
+    } 
+     
+    h = next;
+  }
+  
+  head = newhead; 
 }
 
 template <typename T>
